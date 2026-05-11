@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: -1;
+}
+
+/* Search bar */
+.search {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  position: sticky;
+  top: 10px;
+  z-index: 10;
+}
+
+#city {
+  width: 320px;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 14px 18px;
+  margin-left: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #38bdf8;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Grid Layout */
+#weather-container {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1.3fr 1fr 1fr;
+  gap: 12px;
+  padding: 10px 15px;
+}
+
+/* Cards */
+.bento-card {
+  background: rgba(255, 255, 255, 0.08); /* more transparent */
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  opacity: 0; /* start hidden for animation */
+}
+
+.bento-card:hover {
+  transform: scale(1.05);
+}
+
+/* Main card */
+.main-card {
+  grid-column: span 4;
+  text-align: center;
+  position: relative; /* for time/date */
+  opacity: 1; /* show immediately */
+}
+
+.main-card h2 {
+  font-size: 22px;
+}
+
+.main-card h1 {
+  font-size: 48px;
+  margin: 5px 0;
+}
+
+/* Small cards */
+.bento-card h3 {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.bento-card p {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/* Time + Date */
+#time-date {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* Fade-in animation */
+/* Small cards animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading animation */
+.loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
